@@ -1,0 +1,15 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Model dan database (ukuran besar, bisa diunggah terpisah)
+*.h5
+*.pkl
+
+# Folder data (opsional, jika tidak ingin mengunggah gambar)
+dataset/
+demo_test/
