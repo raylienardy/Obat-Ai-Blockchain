@@ -11,6 +11,5 @@ __pycache__/
 *.pkl
 
 data/
-venv/
 __pycache__/
 *.cache
