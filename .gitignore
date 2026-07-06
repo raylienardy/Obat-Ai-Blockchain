@@ -1,5 +1,5 @@
 # Virtual environment
-venv/
+.venv/
 
 # Python cache
 __pycache__/
@@ -10,6 +10,7 @@ __pycache__/
 *.h5
 *.pkl
 
-# Folder data (opsional, jika tidak ingin mengunggah gambar)
-dataset/
-demo_test/
+data/
+venv/
+__pycache__/
+*.cache
