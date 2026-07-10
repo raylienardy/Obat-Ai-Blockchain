@@ -9,10 +9,12 @@ output/
 
 # Dataset (jangan commit gambar)
 data/dataset/
+data/yolo_dataset/
 data/dataset_clean/
 data/demo_test/
 data/detector_dataset_v2/images/
 data/detector_dataset_v2/labels/
+exp10-new
 
 # Model besar (opsional)
 models/teacher/
