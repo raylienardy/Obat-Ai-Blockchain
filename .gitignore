@@ -1,16 +1,27 @@
-# Virtual environment
+# Environments
 .venv/
+.venv-yolo/
+.venv-wsl/
+.venv-gpu/
 
-# Python cache
+# Output
+output/
+
+# Dataset (jangan commit gambar)
+data/dataset/
+data/dataset_clean/
+data/demo_test/
+data/detector_dataset_v2/images/
+data/detector_dataset_v2/labels/
+
+# Model besar (opsional)
+models/teacher/
+models/*.pt
+
+# Python
 __pycache__/
 *.pyc
-*.pyo
 
-# Model dan database (ukuran besar, bisa diunggah terpisah)
-*.h5
-*.pkl
-
-data/
-output/
-__pycache__/
-*.cache
+# IDE
+.vscode/
+.idea/

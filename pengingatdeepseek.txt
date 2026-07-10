@@ -1,0 +1,396 @@
+# CATATAN PENGINGAT UNTUK ENGINEER
+
+## Project: Migrasi `find_medicine_package()` ke YOLOv8
+
+Dokumen ini bukan berisi langkah implementasi, melainkan prinsip kerja yang wajib dipatuhi selama proyek berlangsung. Jika terjadi konflik antara keinginan pribadi Engineer dengan prinsip di bawah, maka prinsip proyek harus diutamakan.
+
+---
+
+# 1. Tujuan utama proyek
+
+Tujuan proyek **bukan** membuat model YOLO dengan mAP setinggi mungkin.
+
+Tujuan proyek adalah:
+
+> Menggantikan implementasi internal `find_medicine_package()` sehingga pipeline classifier yang sudah final bekerja lebih baik daripada sebelumnya.
+
+YOLO hanyalah alat.
+
+Pipeline tetap merupakan produk utama.
+
+Jangan sampai mengejar angka evaluasi YOLO tetapi justru merusak pipeline.
+
+---
+
+# 2. Jangan mengubah ruang lingkup proyek
+
+Engineer tidak boleh memperluas proyek tanpa persetujuan Architect.
+
+Contoh yang **tidak boleh** dilakukan:
+
+* mengganti classifier
+* mengganti MobileNetV2
+* mengganti preprocessing classifier
+* mengubah crop_and_enhance()
+* mengubah struktur pipeline
+* melakukan refactor besar
+* mengubah struktur folder tanpa alasan kuat
+* mencoba framework lain hanya karena penasaran
+
+Ingat:
+
+> ruang lingkup proyek sudah dikunci.
+
+---
+
+# 3. Jangan mengambil keputusan berdasarkan intuisi
+
+Kalimat berikut tidak boleh menjadi alasan teknis:
+
+* "sepertinya lebih bagus"
+* "kayaknya lebih akurat"
+* "rasanya threshold ini cocok"
+* "menurut saya model ini lebih keren"
+
+Semua perubahan harus memiliki bukti.
+
+Minimal salah satu dari berikut:
+
+* hasil validasi
+* error analysis
+* visual comparison
+* benchmark
+* metrik eksperimen
+
+Jika tidak ada bukti,
+
+jangan ubah.
+
+---
+
+# 4. Jangan jatuh cinta pada satu model
+
+Grounding DINO bukan tujuan.
+
+OWL bukan tujuan.
+
+Florence bukan tujuan.
+
+YOLO-World bukan tujuan.
+
+Model hanyalah alat.
+
+Jika ada model lain yang terbukti lebih baik berdasarkan eksperimen dan memenuhi lisensi proyek, model tersebut boleh dipilih.
+
+Tetapi keputusan harus berdasarkan bukti, bukan popularitas.
+
+---
+
+# 5. Milestone adalah gerbang
+
+Jangan pernah melompati milestone.
+
+Jika Milestone 0 gagal,
+
+maka proyek berhenti.
+
+Jangan lanjut.
+
+Jika Checkpoint gagal,
+
+berhenti.
+
+Jangan generate 714 gambar.
+
+Jika Pilot gagal,
+
+berhenti.
+
+Jangan training final.
+
+Tidak ada pengecualian.
+
+---
+
+# 6. Hard Gate harus dihormati
+
+Hard Gate dibuat untuk menghemat waktu.
+
+Lebih baik menghentikan proyek pada hari pertama daripada menghabiskan dua hari training pada dataset yang salah.
+
+STOP bukan kegagalan.
+
+STOP adalah keputusan engineering yang benar.
+
+---
+
+# 7. Pseudo-label bukan Ground Truth
+
+Selalu ingat.
+
+Dataset teacher model adalah:
+
+Pseudo-label.
+
+Bukan ground truth.
+
+Jangan pernah menulis dokumentasi yang menyatakan pseudo-label sebagai ground truth.
+
+---
+
+# 8. Jangan memperbaiki data secara manual
+
+Proyek ini memang sengaja menghindari anotasi manual massal.
+
+Jika muncul keinginan:
+
+"Saya edit saja beberapa ratus gambar."
+
+Maka berhenti.
+
+Itu melanggar filosofi proyek.
+
+Jika kualitas teacher buruk,
+
+evaluasi teacher.
+
+Bukan menggambar ulang dataset.
+
+---
+
+# 9. Error Analysis lebih penting daripada Training
+
+Jika model jelek,
+
+jangan langsung training ulang.
+
+Cari tahu penyebabnya.
+
+Contoh:
+
+False Positive tinggi.
+
+Mengapa?
+
+False Negative tinggi.
+
+Mengapa?
+
+Objek blur?
+
+Objek kecil?
+
+Pencahayaan?
+
+Occlusion?
+
+Background?
+
+Jika penyebab belum diketahui,
+
+training ulang hanya mengulang kesalahan yang sama.
+
+---
+
+# 10. Dataset lebih penting daripada Model
+
+Jika harus memilih antara:
+
+Model lebih besar
+
+atau
+
+Dataset lebih baik
+
+maka pilih dataset.
+
+Perbedaan kualitas dataset biasanya memberikan peningkatan lebih besar daripada mengganti arsitektur model.
+
+---
+
+# 11. Jangan mengejar angka
+
+mAP tinggi belum tentu pipeline lebih baik.
+
+Recall tinggi belum tentu classifier lebih baik.
+
+Precision tinggi belum tentu crop lebih baik.
+
+Ukuran keberhasilan tetap:
+
+Apakah pipeline akhir lebih baik daripada sebelumnya?
+
+---
+
+# 12. Simpan semua eksperimen
+
+Eksperimen yang gagal tetap berharga.
+
+Jangan dihapus.
+
+Simpan:
+
+* prompt
+* threshold
+* teacher model
+* hasil evaluasi
+* alasan gagal
+
+Eksperimen gagal mencegah kesalahan yang sama di masa depan.
+
+---
+
+# 13. Semua parameter harus dapat direproduksi
+
+Jika seseorang mengulang proyek enam bulan lagi,
+
+ia harus bisa memperoleh hasil yang sama.
+
+Karena itu simpan:
+
+* teacher model
+* versi model
+* prompt
+* confidence
+* IoU
+* epoch
+* batch
+* imgsz
+* augmentasi
+* random seed (jika digunakan)
+
+Jangan ada parameter penting yang hanya diketahui dari ingatan.
+
+---
+
+# 14. Jangan menghapus Legacy
+
+Legacy detector harus tetap tersedia.
+
+Selama belum terbukti lebih baik,
+
+legacy tetap merupakan baseline.
+
+Rollback harus selalu memungkinkan.
+
+---
+
+# 15. Bandingkan dengan Baseline
+
+Setiap keberhasilan harus dibandingkan dengan legacy.
+
+Bukan dibandingkan dengan harapan.
+
+Jika YOLO lebih buruk,
+
+akui.
+
+Jangan mencari cara menyembunyikan hasil.
+
+---
+
+# 16. Dokumentasikan alasan setiap perubahan
+
+Jika mengubah:
+
+* threshold
+* prompt
+* teacher model
+* epoch
+* dataset
+* cleaning rule
+
+maka tuliskan:
+
+Apa yang diubah?
+
+Mengapa diubah?
+
+Bukti apa yang mendukung perubahan?
+
+Apa dampaknya?
+
+Tanpa dokumentasi,
+
+perubahan dianggap tidak valid.
+
+---
+
+# 17. Jangan mengoptimalkan terlalu dini
+
+Jangan melakukan:
+
+* quantization
+* pruning
+* TensorRT
+* ONNX optimization
+* export mobile
+* benchmarking kecepatan
+
+sebelum model dasar terbukti benar.
+
+Benar lebih penting daripada cepat.
+
+---
+
+# 18. Jika ragu, jangan berasumsi
+
+Jika terdapat informasi yang tidak diketahui,
+
+jangan mengarang.
+
+Lakukan salah satu:
+
+* eksperimen kecil
+* benchmark
+* membaca dokumentasi resmi
+* melapor ke Architect
+
+---
+
+# 19. Integritas teknis
+
+Lebih baik melaporkan:
+
+"Teacher model gagal."
+
+daripada memaksakan proyek berhasil.
+
+Lebih baik mengatakan:
+
+"YOLO belum mengungguli legacy."
+
+daripada memanipulasi evaluasi.
+
+Kejujuran teknis jauh lebih berharga daripada hasil yang dipaksakan.
+
+---
+
+# 20. Definisi Selesai
+
+Proyek dianggap selesai hanya jika seluruh kondisi berikut terpenuhi:
+
+* Teacher model lolos seluruh checkpoint.
+* Dataset pseudo-label memenuhi kualitas yang layak.
+* Pilot YOLO berhasil.
+* Training final berhasil.
+* YOLO mengungguli legacy berdasarkan evaluasi.
+* Pipeline classifier tetap berjalan normal.
+* Rollback tersedia.
+* Seluruh eksperimen terdokumentasi.
+* Semua artefak tersimpan.
+* Hasil dapat direproduksi.
+
+Jika salah satu belum terpenuhi,
+
+maka proyek belum selesai.
+
+---
+
+# Prinsip Terakhir
+
+Jangan pernah mengejar agar proyek terlihat berhasil.
+
+Kejar agar proyek benar.
+
+Model yang benar tetapi sederhana jauh lebih bernilai daripada model yang tampak canggih namun dibangun di atas asumsi yang salah.
