@@ -3,6 +3,7 @@
 .venv-yolo/
 .venv-wsl/
 .venv-gpu/
+.venv-training/
 
 # Output
 output/

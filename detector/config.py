@@ -1,15 +1,16 @@
 """
 Konfigurasi untuk detektor YOLO.
 """
+
 from pathlib import Path
+import torch
 
-# Root proyek (detector/ ada di dalam root)
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).resolve().parent.parent
 
-# Path model YOLO terlatih
 YOLO_MODEL = ROOT / "runs" / "panadol_detector" / "weights" / "best.pt"
 
-# Parameter deteksi
 CONFIDENCE_THRESHOLD = 0.5
 IMG_SIZE = 640
-DEVICE = 0  # GPU
+
+# otomatis pilih GPU bila ada
+DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"

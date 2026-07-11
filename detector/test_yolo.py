@@ -6,7 +6,7 @@ import argparse
 from pathlib import Path
 import cv2
 import logging
-from detector.detector import load_model, find_medicine_package_yolo
+from detector.yolo_detector import load_model, find_medicine_package_yolo
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
