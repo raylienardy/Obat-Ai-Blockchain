@@ -1,0 +1,31 @@
+{
+  "baseline_id": "BL-001",
+  "detector": {
+    "name": "YOLO11 Nano",
+    "model_file": "runs/panadol_detector/weights/best.pt",
+    "framework": "PyTorch (Ultralytics)",
+    "input_size": [640, 640],
+    "num_classes": 1,
+    "class_names": ["medicine_package"],
+    "file_size_bytes": 6123456,
+    "sha256_hash": "abc123def456...",
+    "training_date": "2026-07-10",
+    "training_dataset": "data/yolo_dataset/",
+    "num_train_images": 711,
+    "num_val_images": 30
+  },
+  "classifier": {
+    "name": "MobileNetV2",
+    "model_file": "models/panadol_v4_clean.keras",
+    "framework": "TensorFlow/Keras",
+    "input_size": [224, 224, 3],
+    "num_classes": 2,
+    "class_names": ["ASLI", "PALSU"],
+    "file_size_bytes": 9876543,
+    "sha256_hash": "def456abc789...",
+    "training_date": "2026-07-10",
+    "training_dataset": "data/dataset_clean/",
+    "num_train_images": 0,
+    "base_model": "MobileNetV2 (ImageNet pretrained)"
+  }
+}

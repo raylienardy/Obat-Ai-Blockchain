@@ -1,0 +1,22 @@
+{
+  "baseline_id": "BL-001",
+  "source_file": "utils/config.py",
+  "parameters": {
+    "IMG_HEIGHT": 224,
+    "IMG_WIDTH": 224,
+    "MODEL_FILENAME": "panadol_v4_clean.keras",
+    "YOLO_CONFIDENCE_THRESHOLD": 0.5,
+    "CONFIDENCE_FLOOR": 0.65,
+    "CONFIDENCE_HIGH": 0.85,
+    "WHITE_RATIO_MIN": 0.03,
+    "TEXT_BLOBS_MIN": 5,
+    "EDGE_DENSITY_MIN": 0.05,
+    "MIN_AREA_RATIO": 0.02,
+    "MAX_AREA_RATIO": 0.85,
+    "ASPECT_RATIO_MIN": 0.2,
+    "ASPECT_RATIO_MAX": 5.0,
+    "TTA_ENABLE": false,
+    "TEMPERATURE": 1.0,
+    "DEBUG_MODE": false
+  }
+}

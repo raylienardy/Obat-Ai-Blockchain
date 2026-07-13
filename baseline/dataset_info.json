@@ -1,0 +1,16 @@
+{
+  "baseline_id": "BL-001",
+  "dataset_name": "demo_test",
+  "dataset_path": "data/demo_test/",
+  "total_images": 15,
+  "asli_count": 5,
+  "palsu_count": 5,
+  "random_count": 5,
+  "image_extensions": [".jpeg", ".jpg", ".png"],
+  "file_list": [
+    {"filename": "asli.jpeg", "ground_truth": "ASLI"},
+    {"filename": "palsu1.jpeg", "ground_truth": "PALSU"},
+    {"filename": "random3.jpeg", "ground_truth": "RANDOM"}
+  ],
+  "dataset_checksum_sha256": null
+}

@@ -1,0 +1,40 @@
+{
+  "baseline_id": "BL-001",
+  "timestamp": "2026-07-14T10:00:00Z",
+  "dataset": "data/demo_test",
+  "total_images": 15,
+  "class_distribution": {
+    "asli": 5,
+    "palsu": 5,
+    "random": 5
+  },
+  "accuracy": 0.80,
+  "confusion_matrix": {
+    "asli_correct": 5,
+    "asli_incorrect": 0,
+    "palsu_correct": 0,
+    "palsu_incorrect": 5,
+    "random_rejected": 2,
+    "random_incorrect": 3
+  },
+  "false_positive": 3,
+  "false_negative": 5,
+  "precision": 1.0,
+  "recall_asli": 1.0,
+  "recall_palsu": 0.0,
+  "f1_score": 0.67,
+  "average_confidence": 0.87,
+  "average_processing_time_ms": 48.5,
+  "per_image_metrics": [
+    {
+      "filename": "asli1.jpeg",
+      "ground_truth": "ASLI",
+      "final_status": "ASLI",
+      "is_correct": true,
+      "detector_confidence": 0.96,
+      "classifier_confidence": 0.92,
+      "validation_score": 0.85,
+      "processing_time_ms": 42.1
+    }
+  ]
+}
