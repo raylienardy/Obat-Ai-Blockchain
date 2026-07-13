@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 
 
-def is_medicine_package(image, strict=False):
+def is_medicine_package(image, strict=True):
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     mask_white = cv2.inRange(hsv, (0, 0, 180), (180, 50, 255))
     white_ratio = np.sum(mask_white > 0) / mask_white.size
